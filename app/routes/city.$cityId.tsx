@@ -20,8 +20,8 @@ export default function City (){
         throw new Error('Mapbox token is not defined');
     }
     return(
-        <ClientOnly fallback = {<div>Loading...</div>}>
-          {()=><Map mapboxToken={mapboxToken}/>}
-    </ClientOnly>
+        <Suspense fallback = {<div>Loading...</div>}>
+        <Map mapboxToken={mapboxToken}/>
+    </Suspense>
     )
 }
