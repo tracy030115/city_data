@@ -1,7 +1,4 @@
-import type {
-  LinksFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 
 import { useEffect, useState } from "react";
 //import { useEffect } from "react";
@@ -15,9 +12,7 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref },
 ];
 
-
 import { json, redirect } from "@remix-run/node";
-
 
 import {
   Form,
@@ -42,9 +37,7 @@ export const action = async () => {
   return redirect(`/contacts/${contact.id}/edit`);
 };
 
-export const loader = async ({
-  request,
-}: LoaderFunctionArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
   const contacts = await getContacts(q);
@@ -56,10 +49,8 @@ export default function App() {
   const navigation = useNavigation();
   const submit = useSubmit();
   const searching =
-  navigation.location &&
-  new URLSearchParams(navigation.location.search).has(
-    "q"
-  );
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
   // the query now needs to be kept in state
   const [query, setQuery] = useState(q || "");
 
@@ -76,9 +67,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-    <body>
-      <div id="sidebar">{<h1>Remix Contacts</h1>}<div>
-      <Form
+      <body>
+        <div id="sidebar">
+          {<h1>Remix Contacts</h1>}
+          <div>
+            <Form
               id="search-form"
               onChange={(event) => {
                 const isFirstSearch = q === null;
@@ -97,11 +90,7 @@ export default function App() {
                 placeholder="Search"
                 type="search"
               />
-              <div
-                aria-hidden
-                hidden={!searching}
-                id="search-spinner"
-              />
+              <div aria-hidden hidden={!searching} id="search-spinner" />
             </Form>
             <Form method="post">
               <button type="submit">New</button>
@@ -110,19 +99,14 @@ export default function App() {
           <nav>
             {contacts.length ? (
               <ul>
-              {contacts.map((contact) => (
-              <li key={contact.id}>
-                <NavLink
-                className={({ isActive, isPending }) =>
-                isActive
-                  ? "active"
-                  : isPending
-                  ? "pending"
-                  : ""
-              }
-              to={`contacts/${contact.id}`}
-                >
-
+                {contacts.map((contact) => (
+                  <li key={contact.id}>
+                    <NavLink
+                      className={({ isActive, isPending }) =>
+                        isActive ? "active" : isPending ? "pending" : ""
+                      }
+                      to={`contacts/${contact.id}`}
+                    >
                       {contact.first || contact.last ? (
                         <>
                           {contact.first} {contact.last}
@@ -130,9 +114,7 @@ export default function App() {
                       ) : (
                         <i>No Name</i>
                       )}{" "}
-                      {contact.favorite ? (
-                        <span>★</span>
-                      ) : null}
+                      {contact.favorite ? <span>★</span> : null}
                     </NavLink>
                   </li>
                 ))}
@@ -147,9 +129,7 @@ export default function App() {
 
         <div
           className={
-            navigation.state === "loading" && !searching
-              ? "loading"
-              : ""
+            navigation.state === "loading" && !searching ? "loading" : ""
           }
           id="detail"
         >
