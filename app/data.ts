@@ -6,6 +6,7 @@ import { matchSorter } from "match-sorter";
 // @ts-expect-error - no types, but it's a tiny function
 import sortBy from "sort-by";
 import invariant from "tiny-invariant";
+import { StringValidation } from "zod";
 
 type ContactMutation = {
   id?: string;
@@ -71,6 +72,58 @@ export async function getContacts(query?: string | null) {
     });
   }
   return contacts.sort(sortBy("last", "createdAt"));
+}
+
+const DATASET: DataOptionType[] = [{
+  id: '1',
+  label: 'SF crime data',
+  initialViewState: {
+    longitude: -122.41669,
+    latitude: 37.7853,
+    zoom: 13,
+    pitch: 0,
+    bearing: 0,
+  },
+  dataURL:
+  "https://data.sfgov.org/resource/wg3w-h783.json?$limit=1000"
+}, {
+  id: '2',
+  label: 'SF tree data',
+  initialViewState: {
+    longitude: -122.41669,
+    latitude: 37.7853,
+    zoom: 13,
+    pitch: 0,
+    bearing: 0,
+  },
+  dataURL:
+  "https://data.sfgov.org/resource/wg3w-h783.json?$limit=1000"
+}]
+
+export function getAllData(query?: string | null): DataOptionType[] {
+  if (query) {
+    return matchSorter(DATASET, query, {
+      keys: ["label"],
+    });
+  }
+  return DATASET;
+}
+
+export function getData(dataId: string): DataOptionType | undefined {
+  return DATASET.find((data) => data.id === dataId);
+}
+
+export interface DataOptionType {
+id: string;
+label: string;
+initialViewState: {
+  longitude: number;
+  latitude: number;
+  zoom: number;
+  pitch: number;
+  bearing: number;
+};
+dataURL: string;
 }
 
 export async function createEmptyContact() {

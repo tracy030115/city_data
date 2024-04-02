@@ -199,6 +199,10 @@ body {
   color: inherit;
 }
 
+#search-form {
+  width: 100%;
+}
+
 i {
   color: #818181;
 }

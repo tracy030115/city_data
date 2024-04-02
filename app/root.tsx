@@ -29,8 +29,8 @@ import {
 } from "@remix-run/react";
 
 //import { getContacts } from "./data";
-
-import { createEmptyContact, getContacts } from "./data";
+import { getAllData } from "./data";
+import { createEmptyContact, getContacts} from "./data";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -40,12 +40,12 @@ export const action = async () => {
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
-  const contacts = await getContacts(q);
-  return json({ contacts, q });
+  const allData = getAllData(q);
+  return json({ allData, q });
 };
 
 export default function App() {
-  const { contacts, q } = useLoaderData<typeof loader>();
+  const { allData, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   const submit = useSubmit();
   const searching =
@@ -92,38 +92,25 @@ export default function App() {
               />
               <div aria-hidden hidden={!searching} id="search-spinner" />
             </Form>
-            <Form method="post">
-              <button type="submit">New</button>
-            </Form>
+            
           </div>
           <nav>
-            {contacts.length ? (
               <ul>
-                {contacts.map((contact) => (
-                  <li key={contact.id}>
+                {allData.map((data) => (
+                  <li key={data.id}>
                     <NavLink
                       className={({ isActive, isPending }) =>
                         isActive ? "active" : isPending ? "pending" : ""
                       }
-                      to={`contacts/${contact.id}`}
+                      to={`data/${data.id}`}
                     >
-                      {contact.first || contact.last ? (
                         <>
-                          {contact.first} {contact.last}
+                          {data.label}
                         </>
-                      ) : (
-                        <i>No Name</i>
-                      )}{" "}
-                      {contact.favorite ? <span>★</span> : null}
                     </NavLink>
                   </li>
                 ))}
               </ul>
-            ) : (
-              <p>
-                <i>No contacts</i>
-              </p>
-            )}
           </nav>
         </div>
 

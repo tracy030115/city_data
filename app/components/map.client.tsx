@@ -3,6 +3,8 @@ import DeckGL from "@deck.gl/react";
 import { LineLayer } from "@deck.gl/layers";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers";
+import { DataOptionType } from "~/data";
+import { getPositions } from "~/utils/map.utils";
 //import { lazy, Suspense } from 'react'
 //import  Map from 'react-map-gl'
 //const GLMap = lazy(() => import('react-map-gl'))
@@ -26,21 +28,21 @@ const SFCrimeDataURL =
 
 //37.7583491,-122.496964
 
-export default function Map({ mapboxToken }: { mapboxToken: string }) {
+export default function Map({ mapboxToken, data }: { mapboxToken: string; data: DataOptionType }) {
   const layers = [
     new HexagonLayer({
-      id: "hexagonmap-layer",
-      data: SFCrimeDataURL,
+      id: data.id,
+      data: data.dataURL,
       radius: 50,
       pickable: true,
-      getPosition: (d: any) => [Number(d.longitude), Number(d.latitude)],
+      getPosition: getPositions(data.id)
       //aggregation: 'SUM'
     }),
   ];
   return (
     <div style={{ position: "relative", height: "100%" }}>
       <DeckGL
-        initialViewState={INITIAL_VIEW_STATE}
+        initialViewState={data.initialViewState}
         controller={true}
         layers={layers}
       >
