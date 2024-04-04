@@ -76,25 +76,26 @@ export async function getContacts(query?: string | null) {
 
 const DATASET: DataOptionType[] = [{
   id: '1',
-  label: 'SF crime data',
-  initialViewState: {
-    longitude: -122.41669,
-    latitude: 37.7853,
-    zoom: 13,
-    pitch: 0,
-    bearing: 0,
-  },
-  dataURL:
-  "https://data.sfgov.org/resource/wg3w-h783.json?$limit=1000"
-}, {
-  id: '2',
   label: 'SF tree data',
   initialViewState: {
     longitude: -122.41669,
     latitude: 37.7853,
     zoom: 13,
-    pitch: 0,
-    bearing: 0,
+   // pitch: 0,
+   // bearing: 0,
+  },
+  dataURL:
+  "https://data.sfgov.org/resource/tkzw-k3nq.json?$limit=1000"
+}, 
+{
+  id: '2',
+  label: 'SF crime data',
+  initialViewState: {
+    longitude: -122.41669,
+    latitude: 37.7853,
+    zoom: 13,
+   // pitch: 0,
+   // bearing: 0,
   },
   dataURL:
   "https://data.sfgov.org/resource/wg3w-h783.json?$limit=1000"
@@ -120,8 +121,8 @@ initialViewState: {
   longitude: number;
   latitude: number;
   zoom: number;
-  pitch: number;
-  bearing: number;
+ // pitch: number;
+ // bearing: number;
 };
 dataURL: string;
 }
