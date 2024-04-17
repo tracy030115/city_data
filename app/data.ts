@@ -77,6 +77,8 @@ export async function getContacts(query?: string | null) {
 const DATASET: DataOptionType[] = [{
   id: '1',
   label: 'SF tree data',
+  description: "List of dpw maintained street trees including: Planting date, species, and location",
+  referenceUrl: "https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq/about_data",
   initialViewState: {
     longitude: -122.41669,
     latitude: 37.7853,
@@ -90,6 +92,8 @@ const DATASET: DataOptionType[] = [{
 {
   id: '2',
   label: 'SF crime data',
+  description: "Police Department Incident Reports: 2018 to Present",
+  referenceUrl: "https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783/about_data",
   initialViewState: {
     longitude: -122.41669,
     latitude: 37.7853,
@@ -117,6 +121,8 @@ export function getData(dataId: string): DataOptionType | undefined {
 export interface DataOptionType {
 id: string;
 label: string;
+description: string;
+referenceUrl: string;
 initialViewState: {
   longitude: number;
   latitude: number;

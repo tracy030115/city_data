@@ -1,12 +1,10 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 
 import { useEffect, useState } from "react";
-//import { useEffect } from "react";
-
-//import type { LinksFunction } from "@remix-run/node";
-// existing imports
 
 import appStylesHref from "./app.css";
+
+import { Button, CssVarsProvider } from "@mui/joy";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref },
@@ -60,6 +58,7 @@ export default function App() {
     setQuery(q || "");
   }, [q]);
   return (
+    <CssVarsProvider>
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -128,5 +127,6 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+    </CssVarsProvider>
   );
 }
