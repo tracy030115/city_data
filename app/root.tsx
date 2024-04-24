@@ -61,14 +61,14 @@ export default function App() {
     <CssVarsProvider>
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
+      <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
         <div id="sidebar">
-          {<h1>Remix Contacts</h1>}
+          {<h1>City Data</h1>}
           <div>
             <Form
               id="search-form"
