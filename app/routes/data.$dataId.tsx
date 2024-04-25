@@ -1,16 +1,10 @@
-//import Map from 'react-map-gl';
 import { Suspense } from "react";
-// import Map from '../components/map.client'
-// import { json } from '@remix-run/node';
-// import { useLoaderData } from '@remix-run/react';
-//import { lazy, Suspense } from 'react'
 import Map from "../components/map.client";
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { ClientOnly } from "remix-utils/client-only";
 import invariant from "tiny-invariant";
 import { getData } from "~/data";
-//const Map = lazy(() => import('react-map-gl'))
+
 
 export const loader = ({ params }: LoaderFunctionArgs) => {
     invariant(params.dataId, "Missing dataId param");

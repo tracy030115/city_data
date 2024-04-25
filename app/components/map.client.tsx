@@ -1,14 +1,9 @@
 import GLMap from "react-map-gl";
 import DeckGL from "@deck.gl/react";
-import { LineLayer } from "@deck.gl/layers";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
-import { HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { DataOptionType } from "~/data";
 import { getPositions } from "~/utils/map.utils";
 import { useEffect, useState } from "react";
-
-import styled from "@emotion/styled"
-
 import { Box, CircularProgress } from "@mui/joy";
 
 

@@ -1,16 +1,14 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-
 import { useEffect, useState } from "react";
-
 import appStylesHref from "./app.css";
-
 import { Button, CssVarsProvider } from "@mui/joy";
+import { json, redirect } from "@remix-run/node";
+import { getAllData } from "./data";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref },
 ];
 
-import { json, redirect } from "@remix-run/node";
 
 import {
   Form,
@@ -26,14 +24,6 @@ import {
   useSubmit,
 } from "@remix-run/react";
 
-//import { getContacts } from "./data";
-import { getAllData } from "./data";
-import { createEmptyContact, getContacts} from "./data";
-
-export const action = async () => {
-  const contact = await createEmptyContact();
-  return redirect(`/contacts/${contact.id}/edit`);
-};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
